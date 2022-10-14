@@ -1,10 +1,14 @@
 from django.test import TestCase
+from .forms import ItemForm
 
 # Create your tests here.
 
 
-class TestDjango(TestCase):
+class TestItemForm(TestCase):
 
-    # Self refers to TestDjango because it inherits TestCase class
-    def test_this_thing_works(self):
-        self.assertEqual(1, 1)
+    # Self refers to TestItemForm because it inherits TestCase class
+    def test_item_name_is_required(self):
+        form = ItemForm({'name': ''})
+        self.assertFalse(form.is_valid())
+        self.assertIn('name', form.error.keys())
+        self.assertEqual(form.errors['name'][0], 'This field is required.')
