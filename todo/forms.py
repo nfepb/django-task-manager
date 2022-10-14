@@ -10,4 +10,5 @@ class ItemForm(forms.ModelForm):
     """
     class Meta:
         model = Item
+        # Fields to be displayed regardless of fields in db:
         fields = ['name', 'done']
